@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  fcm-service:
+    build: .
+    container_name: fcm-service
+    ports:
+      - "${PORT:-3000}:3000"
+    env_file:
+      - .env
+    volumes:
+      - ./serviceAccountKey.json:/app/keys/serviceAccountKey.json:ro
+      - ./yiga5-24enlinea-f267cb0656e2.json:/app/keys/yiga5-24enlinea-f267cb0656e2.json:ro
+    restart: always

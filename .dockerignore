@@ -1,0 +1,11 @@
+node_modules
+npm-debug.log
+pnpm-lock.yaml
+.git
+.gitignore
+.DS_Store
+secrets/*.example
+
+.env
+keys/
+
