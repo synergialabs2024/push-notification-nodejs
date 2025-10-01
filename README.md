@@ -4,6 +4,11 @@
 # secrets/serviceAccountKey.json
 ```
 
+- Health
+```sh
+http://192.168.92.33:3338/health
+```
+
 
 POST:
 ```sh
