@@ -1,11 +1,8 @@
 node_modules
 npm-debug.log
-pnpm-lock.yaml
+Dockerfile
+docker-compose.yml
 .git
 .gitignore
-.DS_Store
-secrets/*.example
-
 .env
-keys/
-
+*.md

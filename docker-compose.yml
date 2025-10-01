@@ -1,14 +1,13 @@
-version: "3.9"
-
 services:
-  fcm-service:
+  api:
     build: .
-    container_name: fcm-service
+    container_name: push-api
+    env_file: .env
     ports:
-      - "${PORT:-3000}:3000"
-    env_file:
-      - .env
+      - "3000:3000"
     volumes:
-      - ./serviceAccountKey.json:/app/keys/serviceAccountKey.json:ro
-      - ./yiga5-24enlinea-f267cb0656e2.json:/app/keys/yiga5-24enlinea-f267cb0656e2.json:ro
-    restart: always
+      # monta tu JSON de servicio como solo-lectura dentro del contenedor
+      - ./secrets/serviceAccountKey.json:/secrets/serviceAccountKey.json:ro
+    restart: unless-stopped
+    profiles: ["api", "full"]
+
