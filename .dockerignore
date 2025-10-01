@@ -5,4 +5,5 @@ docker-compose.yml
 .git
 .gitignore
 .env
-*.md
+secrets
+README.md
