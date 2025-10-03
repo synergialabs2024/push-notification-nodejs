@@ -32,17 +32,18 @@ export async function sendToOneToken(projectId, accessToken, payload, token) {
       token,
       notification: payload.notification,
       ...(payload.data ? { data: payload.data } : {}),
-    },
-    android: {
-      notification: {
-        channel_id: 'default_channel_id',
-        default_sound: true,
-      },
-    },
-    apns: {
-      payload: {
-        aps: {
+
+      android: {
+        notification: {
+          channelId: 'default_channel_id',
           sound: 'default',
+        },
+      },
+      apns: {
+        payload: {
+          aps: {
+            sound: 'default',
+          },
         },
       },
     },
