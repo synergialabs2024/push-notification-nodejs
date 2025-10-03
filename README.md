@@ -36,3 +36,9 @@ RESPONSE:
   ]
 }
 ```
+
+
+Rebuild:
+```sh
+docker compose --profile api up -d --build
+```
