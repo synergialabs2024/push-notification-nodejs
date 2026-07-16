@@ -5,6 +5,7 @@ export const SendSchema = z.object({
   notification: z.object({
     title: z.string().min(1),
     body: z.string().min(1),
+    image: z.string().url().optional(),
   }),
   data: z.record(z.string(), z.string()).optional(),
 });

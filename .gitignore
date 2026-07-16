@@ -1,6 +1,8 @@
 coverage/
 notes*md
 .tmp
+CLAUDE.md
+AGENTS/
 
 # compiled output
 /dist
