@@ -2,7 +2,10 @@
 FROM node:20-slim AS base
 WORKDIR /app
 ENV NODE_ENV=production
-RUN corepack enable   # activa pnpm/yarn/bun
+# corepack sin versión fijada baja la última pnpm (11.x, requiere Node 22 → node:sqlite).
+# Fijamos pnpm 9.x, compatible con Node 20 y con lockfileVersion 9.0.
+RUN corepack enable \
+    && corepack prepare pnpm@9.15.9 --activate
 
 # ---- deps ----
 FROM base AS deps
