@@ -27,24 +27,38 @@ export async function getAccessToken() {
 export async function sendToOneToken(projectId, accessToken, payload, token) {
   const url = `https://fcm.googleapis.com/v1/projects/${projectId}/messages:send`;
 
+  // URL de imagen (si viene). Se manda por 3 vías para maximizar el render:
+  // 1) notification.image (estándar, background nativo)
+  // 2) android.notification.image (big picture explícito en Android)
+  // 3) data.image (para que la app la lea en FOREGROUND y arme la notificación
+  //    local con BigPictureStyle; los valores de `data` deben ser strings).
+  const image = payload.notification?.image;
+  const data = {
+    ...(payload.data || {}),
+    ...(image ? { image } : {}),
+  };
+
   const body = {
     message: {
       token,
       notification: payload.notification,
-      ...(payload.data ? { data: payload.data } : {}),
+      ...(Object.keys(data).length ? { data } : {}),
 
       android: {
         notification: {
           channelId: 'default_channel_id',
           sound: 'default',
+          ...(image ? { image } : {}),
         },
       },
       apns: {
         payload: {
           aps: {
             sound: 'default',
+            ...(image ? { 'mutable-content': 1 } : {}),
           },
         },
+        ...(image ? { fcm_options: { image } } : {}),
       },
     },
   };

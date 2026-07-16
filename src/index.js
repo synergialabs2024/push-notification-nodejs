@@ -24,20 +24,20 @@ app.post('/send', async (req, res) => {
     const parsed = SendSchema.parse(req.body);
 
     // // ============ SOLO PARA PRUEBAS — COMENTAR / ELIMINAR EN PROD ============
-    // // Limita el envío a una allowlist fija de tokens de prueba: aunque el
-    // // request traiga muchos tokens (los que arma la OFI desde el ERP), solo se
-    // // enviará a los que estén en esta lista. Dejar comentado el bloque en prod.
-    // const TEST_ALLOWED_TOKENS = [
-    //   'REEMPLAZA_CON_TU_DEVICE_TOKEN_DE_PRUEBA',
-    //   // 'otro_device_token_de_prueba',
-    // ];
-    // parsed.tokens = parsed.tokens.filter((t) => TEST_ALLOWED_TOKENS.includes(t));
-    // // Alternativa: forzar SIEMPRE a estos tokens ignorando el request:
-    // // parsed.tokens = TEST_ALLOWED_TOKENS;
-    // logger.warn(
-    //   { count: parsed.tokens.length },
-    //   '[TEST] envío limitado a allowlist de prueba — COMENTAR EN PROD',
-    // );
+    // Limita el envío a una allowlist fija de tokens de prueba: aunque el
+    // request traiga muchos tokens (los que arma la OFI desde el ERP), solo se
+    // enviará a los que estén en esta lista. Dejar comentado el bloque en prod.
+    const TEST_ALLOWED_TOKENS = [
+      'REEMPLAZA_CON_TU_DEVICE_TOKEN_DE_PRUEBA',
+      // 'otro_device_token_de_prueba',
+    ];
+    parsed.tokens = parsed.tokens.filter((t) => TEST_ALLOWED_TOKENS.includes(t));
+    // Alternativa: forzar SIEMPRE a estos tokens ignorando el request:
+    // parsed.tokens = TEST_ALLOWED_TOKENS;
+    logger.warn(
+      { count: parsed.tokens.length },
+      '[TEST] envío limitado a allowlist de prueba — COMENTAR EN PROD',
+    );
     // // ========================================================================
 
     const projectId =
